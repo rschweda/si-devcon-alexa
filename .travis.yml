@@ -7,19 +7,16 @@ services:
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+  - heroku login
 
 install:
-  - gradle installDist
+  - gradle clean installDist
 
 script:
-  - docker build -t si-devcon-alexa/heroku-test:latest .
+  - heroku container:push web -a si-devcon-alexa-setup
 
 deploy:
   provider: script
-  script:
-    #docker push si-devcon-alexa/heroku-test
-    docker push registry.heroku.com/$HEROKU_APP/web;
-    heroku container:release web --app $HEROKU_APP
+  script: heroku container:release web -a si-devcon-alexa-setup
   on:
     branch: feature/heroku
