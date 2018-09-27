@@ -12,6 +12,7 @@ install:
   - gradle clean installDist
 
 script:
+  - heroku container:login
   - heroku container:push web -a si-devcon-alexa-setup
 
 deploy:
