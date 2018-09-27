@@ -10,7 +10,8 @@ import io.dropwizard.setup.Environment;
 public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 
 	public static void main(String args[]) throws Exception {
-		System.out.println("PORT:" +  System.getenv("PORT"));
+		String port = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
+		System.out.println("Setting port to: " + port);
 		System.setProperty("dw.server.connector.port", System.getenv("PORT"));
 
 		new AlexaSkill().run(args);
@@ -27,4 +28,5 @@ public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
 		environment.jersey().register(HelloWorld.class);
 	}
+
 }
