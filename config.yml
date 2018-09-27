@@ -1,7 +1,6 @@
 server:
     type: simple
 
-
 logging:
   level: INFO
   loggers:
