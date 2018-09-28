@@ -10,7 +10,7 @@ public class HelloWorld {
 	@Path("text")
 	@GET
 	public String helloWorldText() {
-		return "Hello nerds!";
+		return "Hallo Team 1!";
 	}
 
 
