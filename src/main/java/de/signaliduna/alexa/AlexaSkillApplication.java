@@ -7,14 +7,14 @@ import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class AlexaSkill extends Application<AlexaSkillConfiguration> {
+public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
 
 	public static void main(String args[]) throws Exception {
 		String port = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
 		System.out.println("Setting port to: " + port);
 		System.setProperty("dw.server.connector.port", System.getenv("PORT"));
 
-		new AlexaSkill().run(args);
+		new AlexaSkillApplication().run(args);
 	}
 
 	public void initialize(Bootstrap<AlexaSkillConfiguration> bootstrap) {

@@ -6,7 +6,7 @@ plugins {
 sourceCompatibility = 1.8
 group 'de.signaliduna.alexa'
 version '1.0'
-mainClassName = 'de.signaliduna.alexa.AlexaSkill'
+mainClassName = 'de.signaliduna.alexa.AlexaSkillApplication'
 
 repositories {
     mavenCentral()
