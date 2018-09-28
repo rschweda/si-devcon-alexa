@@ -28,9 +28,6 @@ public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
-		final DBIFactory factory = new DBIFactory();
-		final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
-
 		environment.jersey().register(HelloWorld.class);
 	}
 
