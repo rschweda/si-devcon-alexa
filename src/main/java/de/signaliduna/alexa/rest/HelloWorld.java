@@ -8,43 +8,35 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.*;
-import java.util.List;
+import java.sql.SQLException;
 
-@Path("hello")
-public class HelloWorld {
+@Path("hello") public class HelloWorld {
 
-	@Path("text")
-	@GET
-	public String helloWorldText() {
+	@Path("text") @GET public String helloWorldText() {
 		return "Hello nerds!";
 	}
 
-	@Path("database")
-	@GET
-	public String getDatabaseConnection() throws SQLException, URISyntaxException {
+	@Path("database") @GET public String getDatabaseConnection() throws SQLException, URISyntaxException {
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
 		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-		try  {
+		try {
 			DBI dbi = new DBI(dbUrl, username, password);
 			Handle handle = dbi.open();
-			handle.createQuery("SELECT 1").first();
+			String result = handle.createQuery("SELECT 1").first(String.class);
 			handle.close();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+
+			return result;
+		} catch (Exception e) {
+			return "Faield with: " + e.getMessage();
 		}
 
-		return "Success";
 	}
 
-	@Path("voice")
-	@POST
-	public String helloWorldVoice() {
+	@Path("voice") @POST public String helloWorldVoice() {
 		// TODO: request handling
 
 		return "Hello";

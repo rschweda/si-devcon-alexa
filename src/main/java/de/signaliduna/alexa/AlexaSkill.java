@@ -4,10 +4,8 @@ import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
-import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.skife.jdbi.v2.DBI;
 
 public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 
@@ -22,9 +20,7 @@ public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 	public void initialize(Bootstrap<AlexaSkillConfiguration> bootstrap) {
 		bootstrap.setConfigurationSourceProvider(
 				new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
-						new EnvironmentVariableSubstitutor()
-				)
-		);
+						new EnvironmentVariableSubstitutor()));
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
