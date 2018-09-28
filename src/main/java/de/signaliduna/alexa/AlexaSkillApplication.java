@@ -1,5 +1,6 @@
 package de.signaliduna.alexa;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -27,6 +28,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
+		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		environment.jersey().register(new LoggingFilter(Logger.getLogger("InboundRequestResponse"), true));
 		environment.jersey().register(HelloWorld.class);
 	}

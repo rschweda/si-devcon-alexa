@@ -4,7 +4,6 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.ResponseEnvelope;
-import com.amazon.ask.servlet.SkillServlet;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
