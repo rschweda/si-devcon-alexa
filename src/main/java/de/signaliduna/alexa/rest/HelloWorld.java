@@ -2,6 +2,8 @@ package de.signaliduna.alexa.rest;
 
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
+import org.skife.jdbi.v2.util.StringColumnMapper;
+import org.skife.jdbi.v2.util.StringMapper;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,7 +28,7 @@ import java.sql.SQLException;
 		try {
 			DBI dbi = new DBI(dbUrl, username, password);
 			Handle handle = dbi.open();
-			String result = handle.createQuery("SELECT 1").first(String.class);
+			String result = handle.createQuery("SELECT 1").map(StringColumnMapper.INSTANCE).first();
 			handle.close();
 
 			return result;
