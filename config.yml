@@ -11,3 +11,16 @@ logging:
     de.signaliduna.alexa: DEBUG
   appenders:
   - type: console
+
+database:
+  driverClass: org.postgresql.Driver
+  user: ${JDBC_DATABASE_USERNAME}
+  password: ${JDBC_DATABASE_PASSWORD}
+  url: ${JDBC_DATABASE_URL}
+  properties:
+    charSet: UTF-8
+  maxWaitForConnection: 3s
+  validationQuery: "SELECT 1"
+  minSize: 1
+  maxSize: 8
+  checkConnectionWhileIdle: false

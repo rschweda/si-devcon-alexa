@@ -4,8 +4,10 @@ import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
 
 public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 
@@ -26,6 +28,9 @@ public class AlexaSkill extends Application<AlexaSkillConfiguration> {
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
+		final DBIFactory factory = new DBIFactory();
+		final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+
 		environment.jersey().register(HelloWorld.class);
 	}
 

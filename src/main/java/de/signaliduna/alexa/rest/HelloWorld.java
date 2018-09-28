@@ -15,26 +15,34 @@ public class HelloWorld {
 	public String helloWorldText() {
 		return "Hello nerds!";
 	}
+/*
+*/
 
-	@Path("database")
-	@GET
-	public String getDatabaseConnection() throws SQLException, URISyntaxException {
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
-		String username = dbUri.getUserInfo().split(":")[0];
-		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-		Connection connection = DriverManager.getConnection(dbUrl, username, password);
-		DatabaseMetaData md = connection.getMetaData();
-		ResultSet rs = md.getTables(null, null, "%", null);
-		StringBuilder resultBuilder = new StringBuilder();
+/*	@Path("database")*/
+/*	@GET*/
+/*	public String getDatabaseConnection() throws SQLException, URISyntaxException {*/
+/*		URI dbUri = new URI(System.getenv("DATABASE_URL"));*/
+/*		String username = dbUri.getUserInfo().split(":")[0];*/
+/*		String password = dbUri.getUserInfo().split(":")[1];*/
+/*		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();*/
+/*		Connection connection = DriverManager.getConnection(dbUrl, username, password);*/
+/*		DatabaseMetaData md = connection.getMetaData();*/
+/*		ResultSet rs = md.getTables(null, null, "%", null);*/
+/*		StringBuilder resultBuilder = new StringBuilder();*/
+/*
+*/
 
-		while (rs.next()) {
-			resultBuilder.append(rs.getString(3));
-			resultBuilder.append("\n");
-		}
+/*		while (rs.next()) {*/
+/*			resultBuilder.append(rs.getString(3));*/
+/*			resultBuilder.append("\n");*/
+/*		}*/
+/*
+*/
 
-		return resultBuilder.toString();
-	}
+/*		return resultBuilder.toString();*/
+/*	}*/
+/*
+*/
 
 	@Path("voice")
 	@POST
