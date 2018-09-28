@@ -60,7 +60,7 @@ public class HelloWorld {
 
 	@Path("voice")
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
+	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response helloWorldVoice(RequestEnvelope requestEnvelope) {
 		System.out.println("ENVELOPE RECEIVED:");
