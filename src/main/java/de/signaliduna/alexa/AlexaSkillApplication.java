@@ -6,6 +6,9 @@ import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.filter.LoggingFilter;
+
+import java.util.logging.Logger;
 
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
 
@@ -24,6 +27,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
+		environment.jersey().register(new LoggingFilter(Logger.getLogger("InboundRequestResponse"), true));
 		environment.jersey().register(HelloWorld.class);
 	}
 
