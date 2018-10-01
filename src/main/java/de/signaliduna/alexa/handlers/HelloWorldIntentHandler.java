@@ -12,8 +12,7 @@ import static de.signaliduna.alexa.rest.HelloWorld.GREETING_TEXT;
 public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Override public boolean canHandle(HandlerInput input) {
-		//return input.matches(intentName("HelloWorldIntent"));
-		return true;
+		return input.matches(intentName("HelloWorldIntent"));
 	}
 
 	@Override public Optional<Response> handle(HandlerInput input) {
