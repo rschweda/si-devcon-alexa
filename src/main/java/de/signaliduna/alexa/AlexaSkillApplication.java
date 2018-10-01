@@ -7,8 +7,6 @@ import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider;
-import org.glassfish.jersey.filter.LoggingFilter;
 import org.jboss.weld.environment.se.Weld;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -42,7 +40,6 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		this.configuration = configuration;
 
 		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		//environment.jersey().register(new LoggingFilter(Logger.getLogger("InboundRequestResponse"), true));
 		environment.jersey().register(HelloWorld.class);
 	}
 
