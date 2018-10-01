@@ -4,11 +4,14 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.ResponseEnvelope;
+import de.signaliduna.alexa.AlexaSkillConfiguration;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringColumnMapper;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,7 +20,11 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 @Path("hello")
+@RequestScoped
 public class HelloWorld {
+
+	@Inject
+	private AlexaSkillConfiguration configuration;
 
 	public static final String GREETING_TEXT = "Hallo Nerds!";
 	private Skill skill;
@@ -31,7 +38,7 @@ public class HelloWorld {
 	@Path("text")
 	@GET
 	public String helloWorldText() {
-		return GREETING_TEXT;
+		return GREETING_TEXT + configuration.getWelcomeMessage() + " - " + this.toString();
 	}
 
 	@Path("database")

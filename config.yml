@@ -11,3 +11,5 @@ logging:
     de.signaliduna.alexa: DEBUG
   appenders:
   - type: console
+
+welcomeMessage: "Hello World!"
