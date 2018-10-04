@@ -60,8 +60,13 @@ public class HelloWorld {
 
 	@Path("http")
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
 	public String helloWorldHttp() throws IOException {
-		String response = httpClient.target("https://uinames.com/api/").request().buildGet().invoke().readEntity(String.class);
+		String response = httpClient.target("https://uinames.com/api/?region=germany")
+				.request()
+				.buildGet()
+				.invoke()
+				.readEntity(String.class);
 		HashMap jsonMap = new ObjectMapper().readValue(response, HashMap.class);
 
 		return "Hello " + jsonMap.get("name") + " " + jsonMap.get("surname") + "!";

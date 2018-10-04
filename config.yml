@@ -28,8 +28,8 @@ database:
   minIdleTime: 1 minute
 
 httpClient:
-  timeout: 500ms
-  connectionTimeout: 500ms
+  timeout: 3s
+  connectionTimeout: 3s
   timeToLive: 1 hour
   cookiesEnabled: false
   maxConnections: 1024
