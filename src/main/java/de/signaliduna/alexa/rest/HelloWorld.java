@@ -3,6 +3,7 @@ package de.signaliduna.alexa.rest;
 import com.amazon.ask.Skill;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.ResponseEnvelope;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
 import de.signaliduna.alexa.db.GreetingDAO;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -10,8 +11,11 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.HashMap;
 
 @Path("hello")
 @RequestScoped
@@ -25,6 +29,9 @@ public class HelloWorld {
 
 	@Inject
 	private Skill skill;
+
+	@Inject
+	Client httpClient;
 
 	public HelloWorld() {}
 
@@ -49,6 +56,15 @@ public class HelloWorld {
 		ResponseEnvelope responseEnvelope = skill.invoke(requestEnvelope);
 
 		return Response.ok().entity(responseEnvelope).build();
+	}
+
+	@Path("http")
+	@GET
+	public String helloWorldHttp() throws IOException {
+		String response = httpClient.target("https://uinames.com/api/").request().buildGet().invoke().readEntity(String.class);
+		HashMap jsonMap = new ObjectMapper().readValue(response, HashMap.class);
+
+		return "Hello " + jsonMap.get("name") + " " + jsonMap.get("surname") + "!";
 	}
 
 }

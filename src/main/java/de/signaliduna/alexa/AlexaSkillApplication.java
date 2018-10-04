@@ -7,6 +7,7 @@ import de.signaliduna.alexa.db.GreetingDAO;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -18,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Named;
+import javax.ws.rs.client.Client;
 import java.net.URI;
 
 @ApplicationScoped
@@ -33,6 +34,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 			}
 	};
 	private GreetingDAO greetingDAO;
+	private JerseyClientBuilder jerseyClientBuilder;
 
 	public static void main(String args[]) throws Exception {
 		// server setup
@@ -62,23 +64,25 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
 		this.configuration = configuration;
 		this.greetingDAO = new GreetingDAO(hibernateBundle.getSessionFactory());
+		this.jerseyClientBuilder = new JerseyClientBuilder(environment)
+				.using(configuration.getHttpClientConfiguration());
 
 		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		environment.jersey().register(HelloWorld.class);
 	}
 
 	@Produces
-	AlexaSkillConfiguration produceConfiguration() {
+	public AlexaSkillConfiguration produceConfiguration() {
 		return configuration;
 	}
 
 	@Produces
-	Logger produceLogger(InjectionPoint injectionPoint) {
+	public Logger produceLogger(InjectionPoint injectionPoint) {
 		return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
 	}
 
 	@Produces
-	Skill produceSkill() {
+	public Skill produceSkill() {
 		return Skills.standard().
 				addRequestHandler(new HelloWorldIntentHandler())
 				.build();
@@ -86,14 +90,18 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 
 	@Produces
 	@ApplicationScoped
-	private  ScanningHibernateBundle<AlexaSkillConfiguration> produceHibernateBundle() {
+	private ScanningHibernateBundle<AlexaSkillConfiguration> produceHibernateBundle() {
 		return hibernateBundle;
 	}
 
 	@Produces
-	@Named("TEST")
 	public GreetingDAO produceGreetingDAO() {
 		return greetingDAO;
+	}
+
+	@Produces
+	public Client produceHttpClient() {
+		return jerseyClientBuilder.build("default");
 	}
 
 }

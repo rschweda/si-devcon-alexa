@@ -2,6 +2,8 @@ package de.signaliduna.alexa;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.dropwizard.client.HttpClientConfiguration;
+import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
 
 import javax.validation.Valid;
@@ -16,6 +18,20 @@ public class AlexaSkillConfiguration extends Configuration {
 
 	public DataSourceFactory getDataSourceFactory() {
 		return database;
+	}
+
+	@Valid
+	@NotNull
+	private JerseyClientConfiguration httpClient = new JerseyClientConfiguration();
+
+	@JsonProperty("httpClient")
+	public JerseyClientConfiguration getHttpClientConfiguration() {
+		return httpClient;
+	}
+
+	@JsonProperty("httpClient")
+	public void setHttpClientConfiguration(JerseyClientConfiguration jerseyClient) {
+		this.httpClient = jerseyClient;
 	}
 
 	@Valid
