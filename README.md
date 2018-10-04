@@ -1,6 +1,5 @@
 # TODO:
 
-- DB-Config via Dropwizard 
 - Replace JDBI with Hibernate
 - Better Request-Logging 
 - Producer for Logger
