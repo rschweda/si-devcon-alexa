@@ -1,15 +1,11 @@
 package de.signaliduna.alexa.rest;
 
 import com.amazon.ask.Skill;
-import com.amazon.ask.Skills;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.ResponseEnvelope;
+import de.signaliduna.alexa.AlexaSkillApplication;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
-import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
-import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.Handle;
-import org.skife.jdbi.v2.util.StringColumnMapper;
-import org.slf4j.Logger;
+import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -25,9 +21,6 @@ public class HelloWorld {
 	private AlexaSkillConfiguration configuration;
 
 	@Inject
-	private DBI jdbi;
-
-	@Inject
 	private Skill skill;
 
 	@Path("text")
@@ -37,15 +30,10 @@ public class HelloWorld {
 	}
 
 	@Path("database")
+	@UnitOfWork
 	@GET
 	public String getDatabaseConnection() {
-		Handle handle = jdbi.open();
-		String result = handle.createQuery("SELECT :greeting")
-				.bind("greeting", configuration.getWelcomeMessage())
-				.map(StringColumnMapper.INSTANCE).first();
-		handle.close();
-
-		return "Success with query result: " + result;
+		return "Success with query result: " + AlexaSkillApplication.greetingDAO.getGreeting();
 	}
 
 	@Path("voice")

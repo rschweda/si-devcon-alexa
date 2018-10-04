@@ -3,31 +3,36 @@ package de.signaliduna.alexa;
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import de.signaliduna.alexa.db.GreetingDAO;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
-import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
-import io.dropwizard.configuration.SubstitutingSourceProvider;
-import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.db.PooledDataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.jboss.weld.environment.se.Weld;
-import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Named;
 import java.net.URI;
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
 
+	HibernateBundle<AlexaSkillConfiguration> hibernateBundle = new ScanningHibernateBundle<AlexaSkillConfiguration>("de.signaliduna.alexa.db") {
+		@Override public PooledDataSourceFactory getDataSourceFactory(AlexaSkillConfiguration configuration) {
+			return configuration.getDataSourceFactory();
+		}
+	};
+
 	private AlexaSkillConfiguration configuration;
-	private DBI jdbi;
+
+	public static GreetingDAO greetingDAO;
 
 	public static void main(String args[]) throws Exception {
 		// server setup
@@ -50,16 +55,13 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	}
 
 	public void initialize(Bootstrap<AlexaSkillConfiguration> bootstrap) {
-		bootstrap.setConfigurationSourceProvider(
-				new SubstitutingSourceProvider(bootstrap.getConfigurationSourceProvider(),
-						new EnvironmentVariableSubstitutor()));
+		bootstrap.addBundle(hibernateBundle);
 	}
 
 	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
 		this.configuration = configuration;
 
-		final DBIFactory factory = new DBIFactory();
-		this.jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+		greetingDAO = new GreetingDAO(hibernateBundle.getSessionFactory());
 
 		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		environment.jersey().register(HelloWorld.class);
@@ -67,10 +69,6 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 
 	@Produces AlexaSkillConfiguration produceConfiguration() {
 		return configuration;
-	}
-
-	@Produces DBI produceDBI() {
-		return jdbi;
 	}
 
 	@Produces Logger produceLogger(InjectionPoint injectionPoint) {

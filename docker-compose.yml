@@ -11,5 +11,6 @@ services:
     image: "postgres:alpine"
     restart: always
     environment:
+      # initial database credentials
       POSTGRES_USER : schweda
       POSTGRES_PASSWORD: secret
