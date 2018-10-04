@@ -12,13 +12,16 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class HelloWorldIntentHandler implements RequestHandler {
 
-	@Inject AlexaSkillConfiguration configuration;
+	@Inject
+	AlexaSkillConfiguration configuration;
 
-	@Override public boolean canHandle(HandlerInput input) {
+	@Override
+	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("HelloWorldIntent"));
 	}
 
-	@Override public Optional<Response> handle(HandlerInput input) {
+	@Override
+	public Optional<Response> handle(HandlerInput input) {
 		return input.getResponseBuilder()
 				.withSpeech(configuration.getWelcomeMessage())
 				.withSimpleCard("HelloWorld", configuration.getWelcomeMessage())

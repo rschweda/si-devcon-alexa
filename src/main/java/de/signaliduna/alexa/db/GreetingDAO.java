@@ -3,7 +3,7 @@ package de.signaliduna.alexa.db;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.*;
+import javax.persistence.Query;
 import java.util.List;
 
 

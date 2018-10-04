@@ -3,8 +3,8 @@ package de.signaliduna.alexa.rest;
 import com.amazon.ask.Skill;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.ResponseEnvelope;
-import de.signaliduna.alexa.AlexaSkillApplication;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
+import de.signaliduna.alexa.db.GreetingDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.enterprise.context.RequestScoped;
@@ -21,7 +21,12 @@ public class HelloWorld {
 	private AlexaSkillConfiguration configuration;
 
 	@Inject
+	private GreetingDAO greetingDAO;
+
+	@Inject
 	private Skill skill;
+
+	public HelloWorld() {}
 
 	@Path("text")
 	@GET
@@ -33,7 +38,7 @@ public class HelloWorld {
 	@UnitOfWork
 	@GET
 	public String getDatabaseConnection() {
-		return "Success with query result: " + AlexaSkillApplication.greetingDAO.getGreeting();
+		return "Success with query result: " + greetingDAO.getGreeting() + greetingDAO.toString() + " - " + this.toString();
 	}
 
 	@Path("voice")

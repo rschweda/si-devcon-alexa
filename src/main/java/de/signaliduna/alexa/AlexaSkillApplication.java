@@ -8,7 +8,6 @@ import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.db.PooledDataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -19,20 +18,21 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Named;
 import java.net.URI;
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
 
-	HibernateBundle<AlexaSkillConfiguration> hibernateBundle = new ScanningHibernateBundle<AlexaSkillConfiguration>("de.signaliduna.alexa.db") {
-		@Override public PooledDataSourceFactory getDataSourceFactory(AlexaSkillConfiguration configuration) {
-			return configuration.getDataSourceFactory();
-		}
-	};
-
 	private AlexaSkillConfiguration configuration;
 
-	public static GreetingDAO greetingDAO;
+	private ScanningHibernateBundle<AlexaSkillConfiguration> hibernateBundle =
+			new ScanningHibernateBundle<AlexaSkillConfiguration>("de.signaliduna.alexa.db") {
+				@Override public PooledDataSourceFactory getDataSourceFactory(AlexaSkillConfiguration configuration) {
+				return configuration.getDataSourceFactory();
+			}
+	};
+	private GreetingDAO greetingDAO;
 
 	public static void main(String args[]) throws Exception {
 		// server setup
@@ -58,25 +58,42 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		bootstrap.addBundle(hibernateBundle);
 	}
 
-	@Override public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
+	@Override
+	public void run(AlexaSkillConfiguration configuration, Environment environment) throws Exception {
 		this.configuration = configuration;
-
-		greetingDAO = new GreetingDAO(hibernateBundle.getSessionFactory());
+		this.greetingDAO = new GreetingDAO(hibernateBundle.getSessionFactory());
 
 		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		environment.jersey().register(HelloWorld.class);
 	}
 
-	@Produces AlexaSkillConfiguration produceConfiguration() {
+	@Produces
+	AlexaSkillConfiguration produceConfiguration() {
 		return configuration;
 	}
 
-	@Produces Logger produceLogger(InjectionPoint injectionPoint) {
+	@Produces
+	Logger produceLogger(InjectionPoint injectionPoint) {
 		return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
 	}
 
-	@Produces Skill produceSkill() {
-		return Skills.standard().addRequestHandler(new HelloWorldIntentHandler()).build();
+	@Produces
+	Skill produceSkill() {
+		return Skills.standard().
+				addRequestHandler(new HelloWorldIntentHandler())
+				.build();
+	}
+
+	@Produces
+	@ApplicationScoped
+	private  ScanningHibernateBundle<AlexaSkillConfiguration> produceHibernateBundle() {
+		return hibernateBundle;
+	}
+
+	@Produces
+	@Named("TEST")
+	public GreetingDAO produceGreetingDAO() {
+		return greetingDAO;
 	}
 
 }
