@@ -12,6 +12,7 @@ import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.jboss.weld.environment.se.Weld;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.ws.rs.client.Client;
 import java.net.URI;
+import java.util.logging.Level;
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
@@ -69,6 +71,14 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 
 		environment.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		environment.jersey().register(HelloWorld.class);
+
+		// Uncomment to enable detailed access log for debugging purposes
+		// enableAccessLog(environment);
+	}
+
+	private void enableAccessLog(Environment environment) {
+		environment.jersey().register(new LoggingFeature(java.util.logging.Logger.getLogger("Inbound-Request"),
+				Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 8192));
 	}
 
 	@Produces

@@ -1,6 +1,5 @@
 # TODO:
 
-- Better Request-Logging 
 - Unit-Test
 - Integration-Test
 - Proper README file
