@@ -9,6 +9,7 @@ import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringColumnMapper;
+import org.slf4j.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,13 +27,8 @@ public class HelloWorld {
 	@Inject
 	private DBI jdbi;
 
+	@Inject
 	private Skill skill;
-
-	public HelloWorld() {
-		skill = Skills.standard()
-				.addRequestHandler(new HelloWorldIntentHandler())
-				.build();
-	}
 
 	@Path("text")
 	@GET

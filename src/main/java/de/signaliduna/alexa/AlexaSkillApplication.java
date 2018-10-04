@@ -1,6 +1,9 @@
 package de.signaliduna.alexa;
 
+import com.amazon.ask.Skill;
+import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -10,17 +13,21 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.jboss.weld.environment.se.Weld;
 import org.skife.jdbi.v2.DBI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Named;
 import java.net.URI;
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
 
 	private AlexaSkillConfiguration configuration;
-	private DBI	jdbi;
+	private DBI jdbi;
 
 	public static void main(String args[]) throws Exception {
 		// server setup
@@ -39,11 +46,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		System.setProperty("dw.database.url", dbUrl);
 
 		// DI container setup
-		new Weld()
-				.initialize()
-				.select(AlexaSkillApplication.class)
-				.get()
-				.run(args);
+		new Weld().initialize().select(AlexaSkillApplication.class).get().run(args);
 	}
 
 	public void initialize(Bootstrap<AlexaSkillConfiguration> bootstrap) {
@@ -62,13 +65,20 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		environment.jersey().register(HelloWorld.class);
 	}
 
-	@Produces
-	@Default
-	AlexaSkillConfiguration produceConfiguration() {
+	@Produces AlexaSkillConfiguration produceConfiguration() {
 		return configuration;
 	}
 
-	@Produces
-	DBI produceDBI() { return jdbi; }
+	@Produces DBI produceDBI() {
+		return jdbi;
+	}
+
+	@Produces Logger produceLogger(InjectionPoint injectionPoint) {
+		return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
+	}
+
+	@Produces Skill produceSkill() {
+		return Skills.standard().addRequestHandler(new HelloWorldIntentHandler()).build();
+	}
 
 }
