@@ -15,9 +15,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
 
 @Path("hello")
 @RequestScoped
@@ -29,7 +26,6 @@ public class HelloWorld {
 	@Inject
 	private DBI jdbi;
 
-	public static final String GREETING_TEXT = "Hallo Nerds!";
 	private Skill skill;
 
 	public HelloWorld() {
@@ -41,25 +37,19 @@ public class HelloWorld {
 	@Path("text")
 	@GET
 	public String helloWorldText() {
-		return GREETING_TEXT + configuration.getWelcomeMessage() + " - " + this.toString();
+		return configuration.getWelcomeMessage() + " - " + this.toString();
 	}
 
 	@Path("database")
 	@GET
-	public String getDatabaseConnection() throws SQLException, URISyntaxException {
+	public String getDatabaseConnection() {
+		Handle handle = jdbi.open();
+		String result = handle.createQuery("SELECT :greeting")
+				.bind("greeting", configuration.getWelcomeMessage())
+				.map(StringColumnMapper.INSTANCE).first();
+		handle.close();
 
-
-		try {
-			Handle handle = jdbi.open();
-			String result = handle.createQuery("SELECT ':greeting'")
-					.bind("greeting", GREETING_TEXT)
-					.map(StringColumnMapper.INSTANCE).first();
-			handle.close();
-
-			return "Success with query result: " + result;
-		} catch (Exception e) {
-			return "Failed with: " + e.getMessage();
-		}
+		return "Success with query result: " + result;
 	}
 
 	@Path("voice")

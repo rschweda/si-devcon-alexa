@@ -18,6 +18,8 @@ public class AlexaSkillConfiguration extends Configuration {
 		return database;
 	}
 
+	@Valid
+	@NotNull
 	@JsonProperty
 	private String welcomeMessage;
 
@@ -25,7 +27,4 @@ public class AlexaSkillConfiguration extends Configuration {
 		return welcomeMessage;
 	}
 
-	public void setWelcomeMessage(String welcomeMessage) {
-		this.welcomeMessage = welcomeMessage;
-	}
 }

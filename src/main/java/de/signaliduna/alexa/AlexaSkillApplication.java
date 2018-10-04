@@ -23,15 +23,13 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	private DBI	jdbi;
 
 	public static void main(String args[]) throws Exception {
+		// server setup
 		String port = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
 		System.out.println("Setting port to: " + port);
 		System.setProperty("dw.server.connector.port", System.getenv("PORT"));
 
-		
+		// database setup
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
-		//URI dbUri = new URI("postgres://schweda:secret@db:5432/schweda");
-
-
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
 		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
@@ -40,6 +38,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		System.setProperty("dw.database.password", password);
 		System.setProperty("dw.database.url", dbUrl);
 
+		// DI container setup
 		new Weld()
 				.initialize()
 				.select(AlexaSkillApplication.class)
