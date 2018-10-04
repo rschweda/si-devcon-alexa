@@ -38,14 +38,14 @@ public class HelloWorld {
 	@Path("text")
 	@GET
 	public String helloWorldText() {
-		return configuration.getWelcomeMessage() + " - " + this.toString();
+		return configuration.getWelcomeMessage();
 	}
 
 	@Path("database")
 	@UnitOfWork
 	@GET
 	public String getDatabaseConnection() {
-		return "Success with query result: " + greetingDAO.getGreeting() + greetingDAO.toString() + " - " + this.toString();
+		return "Success with query result: " + greetingDAO.getGreeting();
 	}
 
 	@Path("voice")
