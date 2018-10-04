@@ -26,6 +26,9 @@ public class HelloWorld {
 	@Inject
 	private AlexaSkillConfiguration configuration;
 
+	@Inject
+	private DBI jdbi;
+
 	public static final String GREETING_TEXT = "Hallo Nerds!";
 	private Skill skill;
 
@@ -44,15 +47,10 @@ public class HelloWorld {
 	@Path("database")
 	@GET
 	public String getDatabaseConnection() throws SQLException, URISyntaxException {
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-		String username = dbUri.getUserInfo().split(":")[0];
-		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
 		try {
-			DBI dbi = new DBI(dbUrl, username, password);
-			Handle handle = dbi.open();
+			Handle handle = jdbi.open();
 			String result = handle.createQuery("SELECT ':greeting'")
 					.bind("greeting", GREETING_TEXT)
 					.map(StringColumnMapper.INSTANCE).first();
