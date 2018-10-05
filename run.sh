@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-./gradlew installDist
+./gradlew clean installDist
 docker-compose up --build
