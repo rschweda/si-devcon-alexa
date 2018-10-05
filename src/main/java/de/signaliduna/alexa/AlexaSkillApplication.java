@@ -89,6 +89,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 				Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 8192));
 	}
 
+	// CDI producer methods
 	@Produces
 	@ApplicationScoped
 	public AlexaSkillConfiguration produceConfiguration() {

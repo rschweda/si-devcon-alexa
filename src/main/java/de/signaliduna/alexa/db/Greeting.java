@@ -2,6 +2,9 @@ package de.signaliduna.alexa.db;
 
 import javax.persistence.*;
 
+/**
+ * Example entity for persistence only containing an ID (primary key).
+ */
 @Entity
 @NamedNativeQueries({
 		@NamedNativeQuery(

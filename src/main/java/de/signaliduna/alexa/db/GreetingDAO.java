@@ -1,6 +1,5 @@
 package de.signaliduna.alexa.db;
 
-import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -9,6 +8,9 @@ import javax.inject.Inject;
 import javax.persistence.Query;
 import java.util.List;
 
+/**
+ * Data Acces Object (DAO) for CRUD operations on {@link Greeting} entities.
+ */
 @ApplicationScoped
 public class GreetingDAO  {
 

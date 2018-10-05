@@ -35,7 +35,7 @@ in the travis.yml file.
 
 ## Sample Endpoints
 
-- `/hello/text`: Example mplementation returning a static text.
+- `/hello/text`: Example implementation returning a static text.
 - `/hello/database`: Example implementation returning a static text retrieved from an remote database.
 - `/hello/http`: Example implementation returning a dynamic text retrieved via an API call.
 - `/hello/voice`: Example implemantion of an Amazon Alexa skill returning an hardcoded text message.

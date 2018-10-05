@@ -10,6 +10,9 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
+/**
+ * A simple handler for HelloWorld intents received from the Alexa service.
+ */
 public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Inject
