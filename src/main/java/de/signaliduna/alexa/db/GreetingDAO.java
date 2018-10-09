@@ -19,7 +19,7 @@ public class GreetingDAO  {
 
 	public String getGreeting() {
 		Query query = currentSession().getNamedNativeQuery("somename")
-				.setParameter("greeting", "Hello Hibernate");
+				.setParameter("greeting", "Hello from the database!");
 		List<String> results = query.getResultList();
 
 		return results.get(0);
