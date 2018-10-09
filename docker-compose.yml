@@ -3,14 +3,15 @@ services:
   skill:
     environment:
       PORT: "8080"
-      DATABASE_URL: "postgres://schweda:secret@db:5432/schweda"
+      DATABASE_URL: "postgres://user:secret@db:5432/user"
     build: .
     ports:
     - "8080:8080"
+    - "5005:5005"
   db:
     image: "postgres:alpine"
     restart: always
     environment:
       # initial database credentials
-      POSTGRES_USER : schweda
+      POSTGRES_USER : user
       POSTGRES_PASSWORD: secret
