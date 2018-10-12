@@ -1,5 +1,6 @@
 package de.signaliduna.alexa.db;
 
+import de.signaliduna.alexa.AlexaSkillConfiguration;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,9 +18,12 @@ public class GreetingDAO  {
 	@Inject
 	private SessionFactory sessionFactory;
 
+	@Inject
+	private AlexaSkillConfiguration alexaSkillConfiguration;
+
 	public String getGreeting() {
 		Query query = currentSession().getNamedNativeQuery("somename")
-				.setParameter("greeting", "Hello from the database!");
+				.setParameter("greeting", alexaSkillConfiguration.getWelcomeMessage());
 		List<String> results = query.getResultList();
 
 		return results.get(0);

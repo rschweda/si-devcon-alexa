@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 /**
  * A simple handler for HelloWorld intents received from the Alexa service.
  */
+@ApplicationScoped
 public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Inject
@@ -20,7 +22,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("HelloWorldIntent"));
+		return true;
 	}
 
 	@Override
