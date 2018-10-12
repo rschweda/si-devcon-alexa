@@ -1,4 +1,4 @@
-# Heroku app name: si-devcon-alexa-setup
+# Heroku app name: si-devcon-alexa-1
 sudo: required
 
 language: java
