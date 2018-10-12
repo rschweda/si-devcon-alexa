@@ -6,13 +6,35 @@ plugins {
 sourceCompatibility = 1.8
 group 'de.signaliduna.alexa'
 version '1.0'
-mainClassName = 'de.signaliduna.alexa.AlexaSkill'
+mainClassName = 'de.signaliduna.alexa.AlexaSkillApplication'
+applicationDefaultJvmArgs = ['-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005']
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // Dropwizard
     compile 'io.dropwizard:dropwizard-core:1.3.5'
-    compile "com.amazon.alexa:ask-sdk:2.3.5"
+
+    // CDI - See: https://jersey.github.io/documentation/latest/cdi.support.html
+    compile 'org.jboss.weld.se:weld-se-core:3.0.5.Final' // Weld SE
+    compile "org.glassfish.jersey.ext.cdi:jersey-cdi1x:2.25" // Jersey CDI support
+    compile "org.glassfish.jersey.ext.cdi:jersey-weld2-se:2.25" // Jersey Weld SE support (@RequestScope)
+
+    // Persistence
+    compile 'io.dropwizard:dropwizard-hibernate:1.3.5'
+    compile 'org.postgresql:postgresql:42.2.5'
+
+    // Alexa
+    compile ("com.amazon.alexa:ask-sdk:2.3.5") {
+        exclude group: 'org.slf4j'
+    }
+
+    // HTTP client
+    compile 'io.dropwizard:dropwizard-client:1.3.5'
+
+    // Testing
+    testCompile 'io.dropwizard:dropwizard-testing:0.7.1'
+    testCompile 'com.google.truth:truth:0.42'
 }

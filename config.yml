@@ -11,3 +11,29 @@ logging:
     de.signaliduna.alexa: DEBUG
   appenders:
   - type: console
+
+database:
+  driverClass: org.postgresql.Driver
+  user: root
+  password: root
+  url: jdbc://example.com/database
+  properties:
+    charSet: UTF-8
+  maxWaitForConnection: 1s
+  validationQuery: "/* Health Check */ SELECT 1"
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
+
+httpClient:
+  timeout: 3s
+  connectionTimeout: 3s
+  timeToLive: 1 hour
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0s
+
+welcomeMessage: "Hello World!"
