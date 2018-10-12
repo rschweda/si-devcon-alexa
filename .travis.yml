@@ -1,4 +1,4 @@
-# Heroku app name: si-devcon-alexa-setup
+# Heroku app name: si-devcon-alexa-2
 sudo: required
 
 language: java
@@ -14,10 +14,10 @@ install:
 
 script:
   - heroku container:login
-  - heroku container:push web -a si-devcon-alexa-setup
+  - heroku container:push web -a si-devcon-alexa-2
 
 deploy:
   provider: script
-  script: heroku container:release web -a si-devcon-alexa-setup
+  script: heroku container:release web -a si-devcon-alexa-2
   on:
-    branch: feature/heroku
+    branch: feature/team-2
