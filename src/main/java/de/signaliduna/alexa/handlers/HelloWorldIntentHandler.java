@@ -27,9 +27,6 @@ public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		System.out.println("SETTING CONFIG: " + configuration.getWelcomeMessage());
-
-
 		return input.getResponseBuilder()
 				.withSpeech(configuration.getWelcomeMessage())
 				.withSimpleCard("HelloWorld", configuration.getWelcomeMessage())
