@@ -46,6 +46,7 @@ public class HelloWorld {
 	 */
 	@Path("text")
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
 	public String helloWorldText() {
 		return configuration.getWelcomeMessage();
 	}
@@ -58,6 +59,7 @@ public class HelloWorld {
 	@Path("database")
 	@UnitOfWork
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
 	public String getDatabaseConnection() {
 		return "Success with query result: " + greetingDAO.getGreeting();
 	}

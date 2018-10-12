@@ -40,6 +40,12 @@ in the travis.yml file.
 - `/hello/http`: Example implementation returning a dynamic text retrieved via an API call.
 - `/hello/voice`: Example implemantion of an Amazon Alexa skill returning an hardcoded text message.
 
+## Debugging
+
+Remote debugging for the __local(!)__ application container is supported under port 5005.
+Debugging the deployed application is not possible, so please work with log statements. A detailed access log can
+be activated in the application class.
+
 ## Further links
 - [https://developer.amazon.com/de/alexa](https://developer.amazon.com/de/alexa)
 - [https://travis-ci.org/](https://travis-ci.org/)
