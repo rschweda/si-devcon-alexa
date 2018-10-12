@@ -81,7 +81,7 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		environment.jersey().register(HelloWorld.class);
 
 		// Uncomment to enable detailed access log for debugging purposes
-		enableAccessLog(environment);
+		//enableAccessLog(environment);
 	}
 
 	private void enableAccessLog(Environment environment) {
