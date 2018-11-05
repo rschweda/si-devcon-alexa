@@ -46,7 +46,26 @@ Remote debugging for the __local(!)__ application container is supported under p
 Debugging the deployed application is not possible, so please work with log statements. A detailed access log can
 be activated in the application class.
 
+## Assignment
+
+- [PowerPoint](goo.gl/BL3wgp)
+- [Aufgabenstellung](https://goo.gl/FjUitW)
+
 ## Further links
 - [https://developer.amazon.com/de/alexa](https://developer.amazon.com/de/alexa)
 - [https://travis-ci.org/](https://travis-ci.org/)
 - [https://www.heroku.com/](https://www.heroku.com/)
+
+## Documentation
+https://developer.amazon.com/alexa-skills-kit/learn
+https://developer.amazon.com/docs/custom-skills/understanding-custom-skills.html
+https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html
+https://developer.amazon.com/docs/custom-skills/dialog-interface-reference.html
+https://developer.amazon.com/blogs/alexa/post/44dd83f4-4842-40c5-91f8-3868b9f4608c/using-dialog-management-to-capture-a-and-b-or-c-slots
+https://developer.amazon.com/blogs/alexa/post/79bc6f74-cfef-47d0-a069-5ed7c0ee5722/taking-control-of-the-dialog-management-state-machine
+
+
+## Samples
+https://github.com/alexa/alexa-skills-kit-sdk-for-java/tree/2.0.x/samples/helloworld
+https://github.com/alexa/skill-sample-java-highlowgame
+https://github.com/alexa/skill-sample-java-quiz-game
