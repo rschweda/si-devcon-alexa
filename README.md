@@ -48,7 +48,7 @@ be activated in the application class.
 
 ## Assignment
 
-- [PowerPoint](goo.gl/BL3wgp)
+- [PowerPoint](https://goo.gl/BL3wgp)
 - [Aufgabenstellung](https://goo.gl/FjUitW)
 
 ## Further links
