@@ -4,6 +4,8 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
+import de.signaliduna.alexa.handlers.CancelandStopIntentHandler;
+import de.signaliduna.alexa.handlers.SessionEndedRequestHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.client.JerseyClientBuilder;

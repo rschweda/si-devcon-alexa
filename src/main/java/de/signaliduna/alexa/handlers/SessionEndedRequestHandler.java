@@ -26,7 +26,7 @@ public class SessionEndedRequestHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(requestType(SessionEndedRequest.class));
+        return input.matches(intentName("SessionEndedRequest"));
     }
 
     @Override
