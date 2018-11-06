@@ -4,10 +4,12 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Optional;
-
+@ApplicationScoped
 public class HelloWorldIntentCancelHandler implements RequestHandler {
 
     @Override
