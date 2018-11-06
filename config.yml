@@ -36,4 +36,4 @@ httpClient:
   maxConnectionsPerRoute: 1024
   keepAlive: 0s
 
-welcomeMessage: "Hello Team 2!"
+welcomeMessage: "Hello Team Brownie!"
