@@ -95,7 +95,7 @@ public class HelloWorld {
 				.readEntity(String.class);
 		HashMap jsonMap = new ObjectMapper().readValue(response, HashMap.class);
 
-		return "Hello " + jsonMap.get("name") + " " + jsonMap.get("surname") + "!";
+		return "Hello " + jsonMap.get("name") + " mein lieblings " + jsonMap.get("surname") + "!";
 	}
 
 }
