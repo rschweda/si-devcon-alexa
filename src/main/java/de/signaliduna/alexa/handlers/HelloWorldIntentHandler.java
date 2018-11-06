@@ -29,7 +29,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		return input.getResponseBuilder()
-				.withSpeech(configuration.getWelcomeMessage())
+				.withSpeech("<audio src='soundbank://soundlibrary/magic/amzn_sfx_fairy_melodic_chimes_01'/>" + configuration.getWelcomeMessage())
 				.withSimpleCard("HelloWorld", configuration.getWelcomeMessage())
 				.build();
 	}
