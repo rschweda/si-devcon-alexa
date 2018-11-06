@@ -32,11 +32,10 @@ public class NavigateHomeIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Goodbye";
 
-        Response Response = input.getResponseBuilder()
+        return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("NavigateHomeIntent", speechText)
                 .build();
 
-        Response.shouldEndSession = true;
     }
 }

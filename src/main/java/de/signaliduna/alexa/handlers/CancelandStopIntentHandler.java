@@ -31,12 +31,11 @@ public class CancelandStopIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Goodbye";
-        
-        Response Response=  input.getResponseBuilder()
+
+        return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("CancelandStopIntent", speechText)
                 .build();
 
-        Response.shouldEndSession = true;
     }
 }
