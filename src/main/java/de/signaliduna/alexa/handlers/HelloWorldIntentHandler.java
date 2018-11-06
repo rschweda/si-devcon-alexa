@@ -22,6 +22,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
+	    System.out.println("BROWNIE INTENT NAME. " + input + " --- "+ intentName("helloworldintent"));
 		return input.matches(intentName("helloworldintent"));
 	}
 
