@@ -3,9 +3,7 @@ package de.signaliduna.alexa;
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import de.signaliduna.alexa.handlers.StatusReportIntentHandler;
-import de.signaliduna.alexa.handlers.CancelandStopIntentHandler;
-import de.signaliduna.alexa.handlers.SessionEndedRequestHandler;
+
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
 import io.dropwizard.client.JerseyClientBuilder;
@@ -27,6 +25,12 @@ import javax.ws.rs.client.Client;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
+
+import de.signaliduna.alexa.handlers.StatusReportIntentHandler;
+import de.signaliduna.alexa.handlers.CancelandStopIntentHandler;
+import de.signaliduna.alexa.handlers.SessionEndedRequestHandler;
+import de.signaliduna.alexa.handlers.HelpIntentHandler;
+import de.signaliduna.alexa.handlers.NavigateHomeIntentHandler;
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
@@ -107,11 +111,15 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	public Skill produceSkill(
 		StatusReportIntentHandler StatusReportIntentHandler, 
 		CancelandStopIntentHandler CancelandStopIntentHandler,
-		SessionEndedRequestHandler SessionEndedRequestHandler) {
+		SessionEndedRequestHandler SessionEndedRequestHandler,
+		HelpIntentHandler HelpIntentHandler,
+		NavigateHomeIntentHandler NavigateHomeIntentHandler) {
 		return Skills.standard()
 				.addRequestHandler(StatusReportIntentHandler)
 				.addRequestHandler(CancelandStopIntentHandler)
 				.addRequestHandler(SessionEndedRequestHandler)
+				.addRequestHandler(HelpIntentHandler)
+				.addRequestHandler(NavigateHomeIntentHandler)
 				.build();
 	}
 

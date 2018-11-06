@@ -24,7 +24,10 @@ public class StatusReportIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+
        String speechText = "Push the red button";
+       
+       
        return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("StatusReportIntent", speechText)
