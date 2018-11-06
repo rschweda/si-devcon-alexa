@@ -23,6 +23,7 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
+		if(input.getRequestEnvelope().getRequest() instanceof IntentRequest)
 		System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent());
 		return input.matches(intentName("SchadenMeldungsIntent"));
 	}
