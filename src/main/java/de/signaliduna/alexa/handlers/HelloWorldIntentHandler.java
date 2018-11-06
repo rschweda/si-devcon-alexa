@@ -22,7 +22,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return true;
+		return input.matches(intentName("helloworldintent"));
 	}
 
 	@Override
