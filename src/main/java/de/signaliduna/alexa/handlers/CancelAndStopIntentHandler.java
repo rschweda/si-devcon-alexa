@@ -21,7 +21,7 @@ public class CancelAndStopIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         return handlerInput.getResponseBuilder()
-                .withSpeech("See you later, alligator")
+                .withSpeech("<amazon:effect name=\"whispered\">See you later, alligator.</amazon:effect>")
                 .withSimpleCard("HelloWorld", "Ende aus Micky Maus.")
                 .build();
     }
