@@ -14,7 +14,8 @@ import static com.amazon.ask.request.Predicates.intentName;
 /**
  * A simple handler for HelloWorld intents received from the Alexa service.
  */
-@ApplicationScopedpublic class HelloWorldIntentHandler implements RequestHandler {
+@ApplicationScoped
+public class HelloWorldIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
