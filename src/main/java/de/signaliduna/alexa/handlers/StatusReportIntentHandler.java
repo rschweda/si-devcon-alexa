@@ -15,19 +15,19 @@ import static com.amazon.ask.request.Predicates.intentName;
  * A simple handler for HelloWorld intents received from the Alexa service.
  */
 @ApplicationScoped
-public class HelloWorldIntentHandler implements RequestHandler {
+public class StatusReportIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("HelloWorldIntent"));
+        return input.matches(intentName("StatusReportIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-       String speechText = "Hello world";
+       String speechText = "Push the red Button";
        return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
+                .withSimpleCard("StatusReport", speechText)
                 .build();
     }
 }

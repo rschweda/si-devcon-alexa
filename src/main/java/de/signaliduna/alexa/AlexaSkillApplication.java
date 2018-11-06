@@ -3,7 +3,7 @@ package de.signaliduna.alexa;
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
+import de.signaliduna.alexa.handlers.StatusReportIntentHandler;
 import de.signaliduna.alexa.handlers.CancelandStopIntentHandler;
 import de.signaliduna.alexa.handlers.SessionEndedRequestHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
@@ -105,11 +105,11 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 
 	@Produces
 	public Skill produceSkill(
-		HelloWorldIntentHandler HelloWorldIntentHandler, 
+		StatusReportIntentHandler StatusReportIntentHandler, 
 		CancelandStopIntentHandler CancelandStopIntentHandler,
 		SessionEndedRequestHandler SessionEndedRequestHandler) {
 		return Skills.standard()
-				.addRequestHandler(HelloWorldIntentHandler)
+				.addRequestHandler(StatusReportIntentHandler)
 				.addRequestHandler(CancelandStopIntentHandler)
 				.addRequestHandler(SessionEndedRequestHandler)
 				.build();
