@@ -36,8 +36,5 @@ httpClient:
   maxConnectionsPerRoute: 1024
   keepAlive: 0s
 
-<<<<<<< HEAD
+
 welcomeMessage: "Hello Team 3!"
-=======
-welcomeMessage: "Hello Team Setup!"
->>>>>>> feature/heroku

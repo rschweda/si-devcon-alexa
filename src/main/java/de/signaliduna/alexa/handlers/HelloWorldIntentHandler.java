@@ -29,7 +29,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
 	public Optional<Response> handle(HandlerInput input) {
 		return input.getResponseBuilder()
 				.withSpeech(configuration.getWelcomeMessage())
-				.withSimpleCard("HelloWorld", configuration.getWelcomeMessage())
+				.withSimpleCard("HelloWorld", "Robotergerauesche")
 				.build();
 	}
 
