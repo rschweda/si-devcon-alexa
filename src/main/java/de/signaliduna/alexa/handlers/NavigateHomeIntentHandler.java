@@ -25,7 +25,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 public class NavigateHomeIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.NavigateHomeIntent")));
+        return input.matches(intentName("AMAZON.NavigateHomeIntent"));
     }
 
     @Override
