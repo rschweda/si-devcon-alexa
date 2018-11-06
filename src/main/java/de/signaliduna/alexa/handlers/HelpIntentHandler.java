@@ -25,7 +25,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 public class HelpIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent")));
+        return input.matches(intentName("AMAZON.HelpIntent"));
     }
 
     @Override
