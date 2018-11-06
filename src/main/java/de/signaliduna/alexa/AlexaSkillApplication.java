@@ -102,9 +102,14 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	}
 
 	@Produces
-	public Skill produceSkill(HelloWorldIntentHandler intentHandler) {
-		return Skills.standard().
-				addRequestHandler(intentHandler)
+	public Skill produceSkill(
+		HelloWorldIntentHandler HelloWorldIntentHandler, 
+		CancelandStopIntentHandler CancelandStopIntentHandler,
+		SessionEndedRequestHandler SessionEndedRequestHandler) {
+		return Skills.standard()
+				.addRequestHandler(HelloWorldIntentHandler)
+				.addRequestHandler(CancelandStopIntentHandler)
+				.addRequestHandler(SessionEndedRequestHandler)
 				.build();
 	}
 
