@@ -14,7 +14,7 @@ public class HelloWorldIntentCancelHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("AMAZON:CancelIntent"));
+        return handlerInput.matches(intentName("AMAZON.CancelIntent"));
     }
 
     @Override
