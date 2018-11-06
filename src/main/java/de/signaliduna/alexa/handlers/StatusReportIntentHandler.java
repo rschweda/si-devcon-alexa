@@ -19,15 +19,15 @@ public class StatusReportIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("StatusReportIntent"));
+         return input.matches(intentName("StatusReportIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-       String speechText = "Push the red Button";
+       String speechText = "Push the red button";
        return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("StatusReport", speechText)
+                .withSimpleCard("StatusReportIntent", speechText)
                 .build();
     }
 }
