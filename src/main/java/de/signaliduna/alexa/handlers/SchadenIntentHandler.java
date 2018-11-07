@@ -26,9 +26,12 @@ public class SchadenIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
+		System.out.println("CALLED SCHADEN INTENT HANDLER");
+		System.out.println(input.getRequestEnvelope().getRequest().getClass());
+
 		if (input.getRequestEnvelope().getRequest() instanceof IntentRequest) {
 			Intent i = ((IntentRequest)input.getRequestEnvelope().getRequest()).getIntent();
-			System.out.println(i.getName());
+			System.out.println("INTENT NAME: " + i.getName());
 		}
 		return input.matches(intentName("SchadenIntent"));
 	}
