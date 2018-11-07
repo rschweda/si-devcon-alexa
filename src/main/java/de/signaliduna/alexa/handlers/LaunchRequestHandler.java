@@ -26,15 +26,15 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("SIStatusMeldungIntent"));
+        return input.matches(intentName("SISchadensMeldungsIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Willkommen zum Signal Iduna Schadensmeldungsassistenten";
+        String speechText = "Willkommen zum Signal Iduna Schadensmeldungsassistenten du töffel";
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("SI Schadensmeldung", speechText)
+                .withSimpleCard("SIGNAL IDUNA Schadensmeldung", speechText)
                 .withReprompt(speechText)
                 .build();
     }
