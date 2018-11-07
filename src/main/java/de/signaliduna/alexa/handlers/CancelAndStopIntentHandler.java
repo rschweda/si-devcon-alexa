@@ -23,6 +23,7 @@ public class CancelAndStopIntentHandler implements RequestHandler {
         return handlerInput.getResponseBuilder()
                 .withSpeech("See you later, <amazon:effect name=\"whispered\">alligator.</amazon:effect><audio src='soundbank://soundlibrary/animals/amzn_sfx_cat_long_meow_1x_01'/>")
                 .withSimpleCard("HelloWorld", "Ende aus Micky Maus.")
+                .withShouldEndSession(true)
                 .build();
     }
 }
