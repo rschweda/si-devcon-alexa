@@ -31,6 +31,8 @@ import de.signaliduna.alexa.handlers.CancelandStopIntentHandler;
 import de.signaliduna.alexa.handlers.SessionEndedRequestHandler;
 import de.signaliduna.alexa.handlers.HelpIntentHandler;
 import de.signaliduna.alexa.handlers.NavigateHomeIntentHandler;
+import de.signaliduna.alexa.handlers.LaunchRequestHandler;
+
 
 @ApplicationScoped
 public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> {
@@ -113,13 +115,15 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 		CancelandStopIntentHandler CancelandStopIntentHandler,
 		SessionEndedRequestHandler SessionEndedRequestHandler,
 		HelpIntentHandler HelpIntentHandler,
-		NavigateHomeIntentHandler NavigateHomeIntentHandler) {
+		NavigateHomeIntentHandler NavigateHomeIntentHandler,
+		LaunchRequestHandler LaunchRequestHandler) {
 		return Skills.standard()
 				.addRequestHandler(StatusReportIntentHandler)
 				.addRequestHandler(CancelandStopIntentHandler)
 				.addRequestHandler(SessionEndedRequestHandler)
 				.addRequestHandler(HelpIntentHandler)
 				.addRequestHandler(NavigateHomeIntentHandler)
+				.addRequestHandler(LaunchRequestHandler)
 				.build();
 	}
 
