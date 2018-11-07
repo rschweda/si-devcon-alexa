@@ -35,6 +35,7 @@ public class NavigateHomeIntentHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("NavigateHomeIntent", speechText)
+                .withShouldEndSession(true)
                 .build();
 
     }
