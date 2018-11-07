@@ -38,7 +38,7 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 		DialogState state = myIntentRequest.getDialogState();
 		if(state == DialogState.STARTED){
 			System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
-			return input.getResponseBuilder().withSpeech("Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?").addDirective(DelegateDirective.builder().withUpdatedIntent(myIntentRequest.getIntent()).build()).build();
+			return input.getResponseBuilder().addDirective(DelegateDirective.builder().withUpdatedIntent(myIntentRequest.getIntent()).build()).build();
 		} else if(state == DialogState.IN_PROGRESS){
 			return input.getResponseBuilder().addDirective(DelegateDirective.builder().withUpdatedIntent(myIntentRequest.getIntent()).build()).build();
 		} else {
