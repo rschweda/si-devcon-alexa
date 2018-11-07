@@ -34,7 +34,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
         //language=XML
         String englishTag = "<lang xml:lang=\"en-US\">";
         String englishEndTag = "</lang>";
-        String butwhy = "Hast du einen <prosody volume=\"x-loud\">VOGEL?</prosody>";
+        String butwhy = "Hast du einen <prosody rate=\"x-slow\" volume=\"x-loud\">VOGEL?</prosody>";
         String piep = "<prosody pitch=\"x-high\">piep piep piep</prosody>";
         return input.getResponseBuilder()
                 .withSpeech(speechText+englishTag+speechText+englishEndTag+butwhy+piep)
