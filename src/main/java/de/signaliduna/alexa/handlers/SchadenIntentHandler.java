@@ -60,6 +60,7 @@ public class SchadenIntentHandler implements RequestHandler {
 			}
 
 		return input.getResponseBuilder()
+				.withSpeech(msg)
 				.withReprompt(msg)
 				.build();
 	}
