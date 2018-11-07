@@ -35,7 +35,6 @@ public class LaunchRequestHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("SIGNAL IDUNA Schadensmeldung", speechText)
-                .withReprompt(speechText)
                 .build();
     }
 
