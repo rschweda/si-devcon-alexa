@@ -23,6 +23,7 @@ public class SchadenIntentCancelHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("HelloWorld", speechText)
+                .withShouldEndSession(true)
                 .build();
     }
 }

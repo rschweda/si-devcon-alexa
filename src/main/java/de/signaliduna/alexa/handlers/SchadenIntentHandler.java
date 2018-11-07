@@ -48,8 +48,7 @@ public class SchadenIntentHandler implements RequestHandler {
 		}*/
 
 		return input.getResponseBuilder()
-				.withSpeech(configuration.getWelcomeMessage())
-				.withSimpleCard("HelloWorld", msg)
+				.withSpeech(msg)
 				.build();
 	}
 
