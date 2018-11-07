@@ -30,7 +30,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "See you later";
+        String speechText = "I am stupid";
         //language=XML
         String englishTag = "<lang xml:lang=\"en-US\">";
         String englishEndTag = "</lang>";
