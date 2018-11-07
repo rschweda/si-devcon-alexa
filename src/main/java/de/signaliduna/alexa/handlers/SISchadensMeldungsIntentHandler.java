@@ -17,6 +17,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.model.dialog.DelegateDirective;
+import com.amazon.ask.model.ui.Image;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
 
 import java.util.Map;
@@ -57,7 +58,9 @@ public class SISchadensMeldungsIntentHandler implements RequestHandler {
             }
             return input.getResponseBuilder()
                 .withSpeech("Vielen Dank." )
-                .withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung: " +  result  )
+                .withStandardCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung: " +  result  ,
+                    Image.builder().withSmallImageUrl("https://www.xing.com/img/custom/cp/assets/logo/2/0/c/12812/square_512px/SIGNAL_IDUNA_Logo_RGB20140304-12615-5hc0tx.jpg").build())
+
                 .withShouldEndSession(true)
                 .build();
         }
