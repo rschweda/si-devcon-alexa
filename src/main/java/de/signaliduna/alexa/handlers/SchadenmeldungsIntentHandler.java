@@ -46,12 +46,12 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
             String result = "";
             for( Slot slot : slots.values()){
             	if(slot.getValue() != null)
-                result += slot.getName() + ": " + slot.getValue() + " ,";
+                result += slot.getName() + ": " + slot.getValue() + "/n";
 
             }
 			return input.getResponseBuilder()
 					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen.<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_outro_01'/><amazon:effect name=\"whispered\">Gut zu wissen, dass es SIGNAL IDUNA gibt</amazon:effect>")
-					.withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung" +  result  )
+					.withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung: " +  result  )
 					.build();
 		}
 

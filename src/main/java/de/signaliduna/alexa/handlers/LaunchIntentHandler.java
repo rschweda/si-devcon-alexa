@@ -23,7 +23,7 @@ public class LaunchIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         return handlerInput.getResponseBuilder()
-                .withSpeech("Willkommen bei Schadi. Ihrem persönlichen Schadensassistenten.<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_bridge_01'/>Möchten Sie einen Schaden melden? Sage einfach Schaden melden und ich erfasse Ihren Schaden.")
+                .withSpeech("Willkommen bei Schadi. Ihrem persönlichen Schadensassistenten.<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_bridge_01'/>Möchten Sie einen Schaden melden? Sagen Sie einfach Schaden melden und ich erfasse Ihren Schaden.")
                 .withSimpleCard("Schadi", "Willkommen bei Schadi. Sag schaden melden")
                 .build();
     }
