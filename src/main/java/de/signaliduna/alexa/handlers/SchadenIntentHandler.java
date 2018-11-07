@@ -39,13 +39,13 @@ public class SchadenIntentHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String msg = "Was für einen schaden möchtest du melden?";
-
+/*
 		Map<String, Slot> slots = ((IntentRequest)input.getRequestEnvelope().getRequest()).getIntent().getSlots();
 
 		Slot kfz = slots.get("kfzSlot");
 		if (kfz == null) {
 			msg = "wann war der Unfall?";
-		}
+		}*/
 
 		return input.getResponseBuilder()
 				.withSpeech(configuration.getWelcomeMessage())
