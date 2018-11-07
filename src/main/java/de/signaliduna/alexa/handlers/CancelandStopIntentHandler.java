@@ -35,6 +35,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("CancelandStopIntent", speechText)
+                .withShouldEndSession(true)
                 .build();
 
     }
