@@ -46,7 +46,7 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
             String result = "";
             for( Slot slot : slots.values()){
             	if(slot.getValue() != null)
-                result += slot.getName() + ": " + slot.getValue() + "/n";
+                result += slot.getName() + ": " + slot.getValue() + "\n";
 
             }
 			return input.getResponseBuilder()
