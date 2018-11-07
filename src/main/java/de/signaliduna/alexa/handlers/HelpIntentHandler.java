@@ -22,7 +22,8 @@ public class HelpIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
 
-        Image img =  Image.builder().withSmallImageUrl("../src/main/resources/image.jpg").build();
+        Image img =  Image.builder().withSmallImageUrl("../../../resources/image.jpg").build();
+
 
         return handlerInput.getResponseBuilder()
                 .withSpeech("Um einen Schaden zu melden sagen sie einfach: Schaden melden. Ich werde dann alle notwendigen Informationen abfragen und Ihre Meldung an einen Mitarbeiter der Signal Iduna weiterleiten. <amazon:effect name=\"whispered\">vielleicht</amazon:effect>")
