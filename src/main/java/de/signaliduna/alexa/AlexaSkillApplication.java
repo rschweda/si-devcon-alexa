@@ -105,9 +105,10 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	public Skill produceSkill(HelloWorldIntentHandler intentHandler, HelloWorldIntentCancelHandler cancelHandler,
 							  HelloWorldIntentStopHandler stopHandler,
 							  SchadenIntentCancelHandler schadenIntentCancelHandler,
-							  SchadenIntentHandler schadenIntentHandler) {
+							  SchadenIntentHandler schadenIntentHandler,
+							  SchadenIntentSessionEndlHandler schadenIntentSessionEndlHandler) {
 		return Skills.standard().
-				addRequestHandlers(intentHandler, cancelHandler, stopHandler, schadenIntentCancelHandler, schadenIntentHandler)
+				addRequestHandlers(intentHandler, cancelHandler, stopHandler, schadenIntentCancelHandler, schadenIntentHandler, schadenIntentSessionEndlHandler)
 				.build();
 	}
 
