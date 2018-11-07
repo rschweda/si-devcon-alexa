@@ -44,8 +44,9 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
             Map<String, Slot> slots = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots();
             System.out.println("MYSLOTS :" + slots.toString());
             String result = "";
-            for( String key : slots.keySet()){
-                result += key + " " + slots.get(key) + " - ";
+            for( Slot slot : slots.values()){
+                result += slot.getName() + ": " + slot.getValue() + " ,";
+
             }
 			return input.getResponseBuilder()
 					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen.")
