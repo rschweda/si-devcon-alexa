@@ -2,8 +2,11 @@ package de.signaliduna.alexa.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.DialogState;
+import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.model.dialog.DelegateDirective;
 import de.signaliduna.alexa.AlexaSkillConfiguration;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -30,11 +33,26 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-        System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
-		return input.getResponseBuilder()
-				.withSpeech("Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?")
-				.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
-				.build();
+		IntentRequest myIntentRequest = ((IntentRequest) input.getRequestEnvelope().getRequest());
+
+		DialogState state = myIntentRequest.getDialogState();
+		if(state == DialogState.STARTED){
+			System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
+			return input.getResponseBuilder()
+					.withSpeech("Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?")
+					.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
+					.build();
+		} else if(state == DialogState.IN_PROGRESS){
+			return input.getResponseBuilder().addDirective(DelegateDirective.builder().withUpdatedIntent(myIntentRequest.getIntent()).build()).build();
+		} else {
+			System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
+			return input.getResponseBuilder()
+					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen.")
+					.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
+					.build();
+		}
+
+
 	}
 
 }
