@@ -30,6 +30,7 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
+        System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
 		return input.getResponseBuilder()
 				.withSpeech("Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?")
 				.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
