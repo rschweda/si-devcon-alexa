@@ -2,6 +2,7 @@ package de.signaliduna.alexa.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
@@ -25,6 +26,10 @@ public class SchadenIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
+		if (input.getRequestEnvelope().getRequest() instanceof IntentRequest) {
+			Intent i = ((IntentRequest)input.getRequestEnvelope().getRequest()).getIntent();
+			System.out.println(i.getName());
+		}
 		return input.matches(intentName("SchadenIntent"));
 	}
 
