@@ -30,12 +30,14 @@ public class CancelandStopIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "I am stupid";
+        String speechText = "Auf wiedersehen";
         //language=XML
         String englishTag = "<lang xml:lang=\"en-US\">";
         String englishEndTag = "</lang>";
+        String butwhy = "Hast du einen <prosody volume=\"x-loud\">VOGEL?</prosody>";
+        String piep = "<prosody pitch=\"x-high\">piep piep piep</prosody>";
         return input.getResponseBuilder()
-                .withSpeech(speechText+englishTag+speechText+englishEndTag)
+                .withSpeech(speechText+englishTag+speechText+englishEndTag+butwhy+piep)
                 .withSimpleCard("CancelandStopIntent", speechText)
                 .withShouldEndSession(true)
                 .build();
