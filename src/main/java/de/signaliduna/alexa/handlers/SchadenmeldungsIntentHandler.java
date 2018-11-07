@@ -45,12 +45,13 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
             System.out.println("MYSLOTS :" + slots.toString());
             String result = "";
             for( Slot slot : slots.values()){
+            	if(slot.getValue() != null)
                 result += slot.getName() + ": " + slot.getValue() + " ,";
 
             }
 			return input.getResponseBuilder()
-					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen.")
-					.withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung ["+  result+"]. <amazon:effect name=\"whispered\">Gut zu wissen, dass es SIGNAL IDUNA gibt</amazon:effect>" )
+					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen. <amazon:effect name=\"whispered\">Gut zu wissen, dass es SIGNAL IDUNA gibt</amazon:effect>")
+					.withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. Zusammenfassung ["+  result +"]." )
 					.build();
 		}
 
