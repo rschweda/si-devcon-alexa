@@ -36,8 +36,9 @@ public class CancelandStopIntentHandler implements RequestHandler {
         String englishEndTag = "</lang>";
         String butwhy = "Hast du einen <prosody rate=\"x-slow\" volume=\"x-loud\">VOGEL?</prosody>";
         String piep = "<prosody pitch=\"x-high\">piep piep piep</prosody>";
+        String cry = "<audio src='soundbank://soundlibrary/human/amzn_sfx_baby_cry_01'/>";
         return input.getResponseBuilder()
-                .withSpeech(speechText+englishTag+speechText+englishEndTag+butwhy+piep)
+                .withSpeech(speechText+englishTag+speechText+englishEndTag+butwhy+piep+cry)
                 .withSimpleCard("CancelandStopIntent", speechText)
                 .withShouldEndSession(true)
                 .build();
