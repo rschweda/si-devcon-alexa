@@ -46,7 +46,7 @@ public class SchadenIntentHandler implements RequestHandler {
 
 			Map<String, Slot> slots = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots();
 
-			if (slots != null && slots.get("schadentyp") != null) {
+			if (slots == null || slots.get("schadentyp") == null) {
 				msg = "Was für einen schaden möchtest du melden?";
 
 
