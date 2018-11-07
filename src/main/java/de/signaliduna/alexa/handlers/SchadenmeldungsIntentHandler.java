@@ -31,8 +31,8 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		return input.getResponseBuilder()
-				.withSpeech("Willkommen beim Signal Iduna Schadensassistenten. Ich helfe Ihnen dabei ihren Schaden zu melden. Was kann ich für Sie tun?")
-				.withSimpleCard("Schadenmeldung","Willkommen beim Signal Iduna Schadensassistenten. Ich helfe Ihnen dabei ihren Schaden zu melden. Was kann ich für Sie tun?" )
+				.withSpeech("Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?")
+				.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
 				.build();
 	}
 
