@@ -45,7 +45,7 @@ public class SchadenmeldungsIntentHandler implements RequestHandler {
 			System.out.println(((IntentRequest) input.getRequestEnvelope().getRequest()).getDialogState());
 			return input.getResponseBuilder()
 					.withSpeech("Vielen Dank. Wir melden uns in Kürze bei Ihnen.")
-					.withSimpleCard("Schadensmeldung","Willkommen beim SIGNAL IDUNA Schadensassistenten. Ich helfe Ihnen dabei Ihren Schaden zu melden. Was kann ich für Sie tun?" )
+					.withSimpleCard("Schadensmeldung","Vielen Dank. Wir melden uns in Kürze bei Ihnen. <amazon:effect name=\"whispered\">Gut zu wissen, dass es SIGNAL IDUNA gibt</amazon:effect>" )
 					.build();
 		}
 
