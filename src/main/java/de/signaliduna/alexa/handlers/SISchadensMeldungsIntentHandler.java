@@ -22,7 +22,7 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 @ApplicationScoped
-public class LaunchRequestHandler implements RequestHandler {
+public class SISchadensMeldungsIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
