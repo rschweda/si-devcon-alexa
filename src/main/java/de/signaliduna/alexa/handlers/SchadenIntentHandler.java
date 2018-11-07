@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
@@ -23,6 +24,7 @@ public class SchadenIntentHandler implements RequestHandler {
 
 	@Inject
 	AlexaSkillConfiguration configuration;
+
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
@@ -38,18 +40,28 @@ public class SchadenIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String msg = "Was für einen schaden möchtest du melden?";
 
-		/*if (input.getRequestEnvelope().getRequest() instanceof IntentRequest) {
+		String msg = "";
+
+
 			Map<String, Slot> slots = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots();
 
-			Slot kfz = slots.get("kfzSlot");
+			Slot kfz = slots.get("schadentyp");
 			if (kfz == null) {
-				msg = "wann war der Unfall?";
+				msg = "Was für einen schaden möchtest du melden?";
+
+
+			} else {
+				input.getAttributesManager().getSessionAttributes().put("schadentyp", kfz);
+
+				msg = "tiao!";
+				return input.getResponseBuilder()
+						.withSpeech(msg)
+						.build();
 			}
-		}*/
+
 		return input.getResponseBuilder()
-				.withSpeech(msg)
+				.withReprompt(msg)
 				.build();
 	}
 
