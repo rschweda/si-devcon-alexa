@@ -5,6 +5,7 @@ import com.amazon.ask.Skills;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import de.signaliduna.alexa.handlers.CancelAndStopIntentHandler;
 import de.signaliduna.alexa.handlers.HelloWorldIntentHandler;
+import de.signaliduna.alexa.handlers.LaunchIntentHandler;
 import de.signaliduna.alexa.handlers.SchadenmeldungsIntentHandler;
 import de.signaliduna.alexa.rest.HelloWorld;
 import io.dropwizard.Application;
@@ -104,9 +105,9 @@ public class AlexaSkillApplication extends Application<AlexaSkillConfiguration> 
 	}
 
 	@Produces
-	public Skill produceSkill(HelloWorldIntentHandler intentHandler, CancelAndStopIntentHandler cancelHandler, SchadenmeldungsIntentHandler schadenHandler) {
+	public Skill produceSkill(HelloWorldIntentHandler intentHandler, CancelAndStopIntentHandler cancelHandler, SchadenmeldungsIntentHandler schadenHandler, LaunchIntentHandler launchHandler) {
 		return Skills.standard().
-				addRequestHandlers(intentHandler, cancelHandler, schadenHandler)
+				addRequestHandlers(intentHandler, cancelHandler, schadenHandler, launchHandler)
 				.build();
 	}
 
